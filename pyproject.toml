@@ -1,0 +1,76 @@
+[project]
+name            = "torch-gpu-env"
+version         = "0.1.0"
+description     = "PyTorch + CUDA 11.8 ortamı (Windows, Python 3.10)"
+requires-python = ">=3.10,<3.11"
+
+dependencies = [
+  # Core
+  "torch",           # GPU destekli PyTorch
+  "torchvision",     # Görüntü işlemleri
+  "torchaudio",      # Ses işlemleri
+
+  # Veri bilimi & ML
+  "numpy",           # Sayısal hesaplama
+  "pandas",          # Veri çerçeveleri
+  "scipy",           # İleri matematiksel fonksiyonlar
+  "scikit-learn",    # Makine öğrenmesi araçları
+
+  # Görselleştirme
+  "matplotlib",      # Grafikler
+  "seaborn",         # İstatistiksel görselleştirme
+  "plotly",          # Etkileşimli grafikler
+  "tensorboard",     # Eğitim takibi
+
+  # Görüntü işleme
+  "Pillow",          # Resim okuma/yazma
+  "opencv-python",   # OpenCV bağlaması
+  "scikit-image",    # Görüntü işleme araçları
+
+  # Doğal Dil İşleme
+  "transformers",    # HuggingFace Transformers
+  "datasets",        # HuggingFace Datasets
+  "sentence-transformers",  # SBERT
+
+  # Web & API
+  "fastapi",         # API geliştirme
+  "uvicorn",         # ASGI sunucu
+  "requests",        # HTTP istemcisi
+  "python-dotenv",   # .env dosyaları
+
+  # Yardımcılar
+  "tqdm",            # İlerleme çubukları
+  "joblib",          # Paralel hesaplama
+  "psutil",          # Sistem izleme
+  "yapf",            # Kod biçimlendirme
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",          # Testler için
+  "flake8",          # Kod kalitesi
+  "isort",           # İçe aktarma sıralama
+  "black",           # Kod biçimlendirme
+  "mypy",            # Tip kontrolü
+  "pre-commit",      # Git öncesi kontroller
+]
+
+[build-system]
+requires    = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# -------- uv (universe) yapılandırması --------
+[tool.uv.sources]
+torch        = { index = "pytorch-cu118" }
+torchvision  = { index = "pytorch-cu118" }
+torchaudio   = { index = "pytorch-cu118" }
+
+[[tool.uv.index]]
+name    = "pypi"
+url     = "https://pypi.org/simple"
+default = true
+
+[[tool.uv.index]]
+name     = "pytorch-cu118"
+url      = "https://download.pytorch.org/whl/cu118"
+explicit = true
